@@ -1,194 +1,142 @@
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f5f8fc;
+  font-family: "Poppins", sans-serif;
   margin: 0;
+  background-color: #f5f9ff;
   color: #1a2b4c;
-}
-
-/* Formulário */
-#form-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(20, 40, 80, 0.9);
-  display: flex; justify-content: center; align-items: center;
-  z-index: 999;
-}
-
-#formulario {
-  background: #fff;
-  padding: 30px;
-  border-radius: 15px;
-  width: 320px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-}
-
-#formulario h2 {
-  text-align: center;
-  color: #1a2b4c;
-}
-
-#formulario label {
-  display: block;
-  margin-top: 10px;
-  font-size: 14px;
-}
-
-#formulario input, #formulario select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-#formulario button {
-  margin-top: 20px;
-  width: 100%;
-  background: #3269e3;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#formulario button:hover {
-  background: #204cbf;
 }
 
 /* Cabeçalho */
 header {
-  background: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 50px;
+  padding: 20px 60px;
+  background: white;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-header .logo {
-  font-size: 22px;
+.logo {
+  font-size: 1.5em;
   font-weight: bold;
-  color: #1a2b4c;
 }
 
 nav a {
-  margin-left: 25px;
+  margin: 0 15px;
   text-decoration: none;
   color: #1a2b4c;
   font-weight: 500;
 }
 
-nav a:hover {
-  color: #3269e3;
+#perfil-btn {
+  background: #dce8ff;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 10px;
 }
 
-/* Conteúdo principal */
-.intro {
+/* Hero */
+.hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px;
+  padding: 60px;
 }
 
-.intro h1 {
-  font-size: 42px;
-  color: #1a2b4c;
+.hero img {
+  width: 320px;
 }
 
-.intro p {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-
-.btn {
-  background: #3269e3;
+.btn-azul {
+  background: #3a7bfd;
   color: white;
+  padding: 10px 20px;
   border: none;
-  padding: 12px 25px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-weight: 600;
 }
-
-.btn:hover { background: #204cbf; }
 
 /* Cards */
 .cards {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin: 40px 0;
+  gap: 20px;
+  padding: 40px;
 }
 
 .card {
   background: white;
   padding: 25px;
   border-radius: 12px;
-  width: 280px;
+  width: 250px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: 0.3s;
-}
-.card:hover { transform: scale(1.03); }
-.card img { width: 60px; }
-
-/* Perfil */
-.perfil {
-  background: #e8f0ff;
-  margin: 50px auto;
-  padding: 30px;
-  border-radius: 12px;
-  width: 80%;
-  text-align: center;
 }
 
-.perfil-box {
+/* Formulário overlay */
+#form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#formulario {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
 }
 
-.perfil-buttons button {
-  margin: 10px;
-  background: #3269e3;
+#formulario input, #formulario select {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#formulario button {
+  background: #3a7bfd;
   color: white;
   border: none;
-  padding: 8px 15px;
+  padding: 12px;
   border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
 }
-.perfil-buttons button:hover { background: #204cbf; }
 
-/* Notícias */
-.news {
+/* Modal do perfil */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
   background: white;
-  padding: 30px 50px;
-}
-.news-container {
-  display: flex;
-  gap: 20px;
-}
-.news article {
-  background: #f1f6ff;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
-  width: 50%;
+  width: 320px;
 }
 
-/* Contato e Rodapé */
-.contato {
-  padding: 40px;
-  text-align: center;
-}
-
-footer {
-  background: #1a2b4c;
-  color: white;
-  text-align: center;
-  padding: 15px;
+#fechar-perfil {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
 }

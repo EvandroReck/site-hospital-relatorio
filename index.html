@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- Tela de Formulário -->
   <div id="form-overlay">
     <form id="formulario">
@@ -36,7 +37,7 @@
     </form>
   </div>
 
-  <!-- Conteúdo principal do site -->
+  <!-- Cabeçalho -->
   <header>
     <div class="logo">+ SAÚDE</div>
     <nav>
@@ -44,9 +45,12 @@
       <a href="#">Campanhas</a>
       <a href="#">Vacinação</a>
       <a href="#">Atendimentos</a>
+      <a href="#">Notícias</a>
+      <a href="#">Contato</a>
     </nav>
   </header>
 
+  <!-- Conteúdo principal -->
   <main>
     <section class="intro">
       <div class="text">
@@ -76,25 +80,103 @@
         <p>Disponibilidade de atendimentos e consultas.</p>
       </div>
     </section>
+
+    <!-- Perfil do Usuário -->
+    <section id="perfil" class="perfil">
+      <h2>👤 Meu Perfil</h2>
+      <div class="perfil-box">
+        <p><strong>Nome:</strong> <span id="pNome"></span></p>
+        <p><strong>Telefone:</strong> <span id="pNumero"></span></p>
+        <p><strong>CPF:</strong> <span id="pCpf"></span></p>
+        <p><strong>Endereço:</strong> <span id="pEndereco"></span></p>
+        <p><strong>Estado civil:</strong> <span id="pEstadoCivil"></span></p>
+        <div class="perfil-buttons">
+          <button id="editar">Editar</button>
+          <button id="sair">Sair</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notícias -->
+    <section class="news">
+      <h2>🩺 Notícias da Saúde</h2>
+      <div class="news-container">
+        <article>
+          <h3>Nova campanha contra a dengue</h3>
+          <p>Hospitais do SUS iniciam nova mobilização para combater o mosquito Aedes aegypti em todo o país.</p>
+        </article>
+        <article>
+          <h3>Vacinação ampliada</h3>
+          <p>O Ministério da Saúde amplia a faixa etária de vacinação contra gripe em todo o território nacional.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contato">
+      <h2>📞 Entre em contato</h2>
+      <p>Email: contato@saude.gov.br</p>
+      <p>Telefone: 136</p>
+    </section>
   </main>
+
+  <footer>
+    <p>© 2025 Promoção da Saúde | Desenvolvido por King Op</p>
+  </footer>
 
   <script>
     const form = document.getElementById('formulario');
     const overlay = document.getElementById('form-overlay');
+    const perfil = document.getElementById('perfil');
 
+    // Preenche perfil com dados salvos
+    window.onload = () => {
+      const dados = JSON.parse(localStorage.getItem('usuario'));
+      if (dados) {
+        mostrarPerfil(dados);
+        overlay.style.display = 'none';
+      }
+    };
+
+    // Envio do formulário
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const nome = document.getElementById('nome').value.trim();
-      const numero = document.getElementById('numero').value.trim();
-      const cpf = document.getElementById('cpf').value.trim();
-      const endereco = document.getElementById('endereco').value.trim();
-      const estadoCivil = document.getElementById('estadoCivil').value;
+      const usuario = {
+        nome: document.getElementById('nome').value.trim(),
+        numero: document.getElementById('numero').value.trim(),
+        cpf: document.getElementById('cpf').value.trim(),
+        endereco: document.getElementById('endereco').value.trim(),
+        estadoCivil: document.getElementById('estadoCivil').value
+      };
 
-      if (nome && numero && cpf && endereco && estadoCivil) {
-        overlay.style.display = 'none';
+      if (Object.values(usuario).some(v => v === "")) {
+        alert('Preencha todos os campos!');
       } else {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+        mostrarPerfil(usuario);
+        overlay.style.display = 'none';
       }
+    });
+
+    // Mostra dados do perfil
+    function mostrarPerfil(dados) {
+      document.getElementById('pNome').textContent = dados.nome;
+      document.getElementById('pNumero').textContent = dados.numero;
+      document.getElementById('pCpf').textContent = dados.cpf;
+      document.getElementById('pEndereco').textContent = dados.endereco;
+      document.getElementById('pEstadoCivil').textContent = dados.estadoCivil;
+    }
+
+    // Botões do perfil
+    document.getElementById('editar').addEventListener('click', () => {
+      localStorage.removeItem('usuario');
+      location.reload();
+    });
+
+    document.getElementById('sair').addEventListener('click', () => {
+      localStorage.removeItem('usuario');
+      alert("Você saiu da sua conta.");
+      location.reload();
     });
   </script>
 </body>

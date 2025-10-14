@@ -14,7 +14,7 @@
       <nav class="main-nav">
         <a href="index.html">Início</a>
         <a href="medicamentos.html" class="highlight">Medicamentos</a>
-        <button id="perfil-btn" class="profile-btn">👤</button>
+        <button id="perfil-btn" class="profile-btn" title="Abrir perfil">👤</button>
       </nav>
     </div>
   </header>
@@ -26,9 +26,7 @@
         <p>Escolha entre os 100 medicamentos mais usados. Clique em "+" para adicionar ao carrinho.</p>
       </div>
 
-      <div id="meds-grid" class="meds-grid">
-        <!-- JavaScript popula aqui os 100 medicamentos -->
-      </div>
+      <div id="meds-grid" class="meds-grid" aria-live="polite"></div>
     </section>
 
     <aside class="cart-side">
@@ -51,23 +49,21 @@
   </main>
 
   <!-- Modal de compra / QR code fictício -->
-  <div id="checkout-modal" class="modal">
+  <div id="checkout-modal" class="modal" aria-hidden="true">
     <div class="modal-content card">
-      <button id="fechar-checkout" class="close-btn">&times;</button>
+      <button id="fechar-checkout" class="close-btn" aria-label="fechar">&times;</button>
       <h3>Pagamento</h3>
-      <div id="checkout-body">
-        <!-- Conteúdo: QR code fictício ou formulário de cartão -->
-      </div>
+      <div id="checkout-body"></div>
       <div class="modal-actions">
         <button id="btn-confirmar" class="btn primary">Concluir (simulado)</button>
       </div>
     </div>
   </div>
 
-  <!-- Perfil modal (reaproveita a mesma estrutura do index) -->
-  <div id="perfil-modal" class="modal">
+  <!-- Perfil modal (reaproveita) -->
+  <div id="perfil-modal" class="modal" aria-hidden="true">
     <div class="modal-content card">
-      <button id="fechar-perfil" class="close-btn">&times;</button>
+      <button id="fechar-perfil" class="close-btn" aria-label="fechar">&times;</button>
       <h3>Perfil do usuário</h3>
       <div class="perfil-info">
         <p><strong>Nome:</strong> <span id="perfil-nome"></span></p>

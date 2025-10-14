@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital & Farmácia Digital</title>
+<style>
+/* ===== RESET ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+body { background:#f5f9fc; color:#333; scroll-behavior: smooth; }
+
+/* ===== HEADER ===== */
+header { background:#0077b6; color:white; padding:20px 0; position:sticky; top:0; z-index:1000; }
+header nav { display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:auto; padding:0 20px; }
+header nav a { color:white; text-decoration:none; margin:0 10px; font-weight:bold; transition:0.3s; }
+header nav a:hover { text-decoration:underline; }
+.menu-right { display:flex; align-items:center; gap:10px; }
+
+/* ===== BANNER ===== */
+.banner { background:url('https://images.unsplash.com/photo-1588776814546-9c1d07c7e4de?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat; height:400px; display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; text-shadow:0 0 10px rgba(0,0,0,0.5); }
+.banner h1 { font-size:3em; margin-bottom:10px; animation:fadeIn 1.5s ease; }
+.banner p { font-size:1.2em; margin-bottom:20px; animation:fadeIn 2s ease; }
+.banner button { background:#00b4d8; border:none; padding:15px 30px; color:white; font-size:1em; cursor:pointer; border-radius:5px; transition:0.3s; }
+.banner button:hover { background:#0096c7; transform:scale(1.05); }
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+/* ===== SEÇÕES ===== */
+section { max-width:1200px; margin:50px auto; padding:0 20px; }
+section h2 { margin-bottom:20px; color:#023e8a; text-align:center; }
+
+/* Serviços */
+.services { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.service-card { background:white; flex:1 1 200px; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); transition:0.3s; text-align:center; }
+.service-card:hover { transform:translateY(-5px); }
+
+/* Farmácia */
+.pharmacy-controls { display:flex; justify-content:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.pharmacy-controls input, .pharmacy-controls select { padding:8px; border-radius:5px; border:1px solid #ccc; }
+.pharmacy { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:20px; }
+.product { background:white; padding:15px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); text-align:center; transition:0.3s; }
+.product:hover { transform:translateY(-5px); }
+.product img { width:100px; height:100px; object-fit:cover; margin-bottom:10px; }
+.product button { margin-top:10px; padding:8px 15px; background:#00b4d8; border:none; color:white; border-radius:5px; cursor:pointer; transition:0.3s; }
+.product button:hover { background:#0096c7; }
+
+/* Carrinho */
+#cart { position:fixed; right:20px; top:80px; background:white; padding:20px; border-radius:10px; box-shadow:0 2px 15px rgba(0,0,0,0.2); width:320px; max-height:500px; overflow-y:auto; display:none; z-index:1500; }
+#cart h3 { margin-bottom:10px; text-align:center; }
+#cart ul { list-style:none; padding:0; }
+#cart li { display:flex; justify-content:space-between; margin-bottom:10px; align-items:center; }
+#cart button { background:red; padding:2px 6px; border:none; color:white; border-radius:3px; cursor:pointer; }
+
+/* Modal Formulário e Login/Cadastro */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:2000; }
+.modal-content { background:white; padding:30px; border-radius:10px; width:320px; text-align:center; animation:fadeIn 0.5s; }
+.modal-content input { width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc; }
+.modal-content button { padding:10px 20px; border:none; background:#0077b6; color:white; border-radius:5px; cursor:pointer; transition:0.3s; }
+.modal-content button:hover { background:#0096c7; }
+
+/* Perfil */
+#profile { display:none; background:white; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); max-width:400px; margin:auto; }
+#profile h3 { margin-bottom:10px; }
+#profile input { width:100%; padding:8px; margin:5px 0; border-radius:5px; border:1px solid #ccc; }
+#profile button { width:48%; margin:5px 1%; padding:10px; }
+
+/* Footer */
+footer { background:#023e8a; color:white; padding:30px 20px; text-align:center; }
+footer a { color:#90e0ef; text-decoration:none; margin:0 5px; }
+
+/* Responsividade */
+@media(max-width:768px){ .services { flex-direction:column; } .banner h1 { font-size:2em; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><strong>Hospital & Farmácia</strong></div>
+    <div class="menu-right">
+      <a href="#home">Home</a>
+      <a href="#services">Serviços</a>
+      <a href="#pharmacy">Farmácia</a>
+      <a href="#profile" onclick="openProfile()">Perfil</a>
+      <a href="#contact">Contato</a>
+      <button onclick="openCart()">🛒 Carrinho</button>
+    </div>
+  </nav>
+</header>
+
+<section class="banner" id="home">
+  <h1>Bem-vindo ao Hospital & Farmácia</h1>
+  <p>Atendimento completo e farmácia digital integrada.</p>
+  <button onclick="openCart()">Acessar Farmácia</button>
+</section>
+
+<section id="services">
+  <h2>Nossos Serviços</h2>
+  <div class="services">
+    <div class="service-card">🏥 Consultas Médicas</div>
+    <div class="service-card">🧪 Exames</div>
+    <div class="service-card">🩺 Especialidades</div>
+    <div class="service-card">🚑 Emergências</div>
+    <div class="service-card">💉 Vacinação</div>
+  </div>
+</section>
+
+<section id="pharmacy">
+  <h2>Farmácia Digital</h2>
+  <div class="pharmacy-controls">
+    <input type="text" id="search" placeholder="Pesquisar produto..." oninput="filterProducts()">
+    <select id="category" onchange="filterProducts()">
+      <option value="">Todas Categorias</option>
+      <option value="Analgésico">Analgésico</option>
+      <option value="Anti-inflamatório">Anti-inflamatório</option>
+      <option value="Suplemento">Suplemento</option>
+    </select>
+    <select id="sort" onchange="filterProducts()">
+      <option value="">Ordenar por</option>
+      <option value="price-asc">Preço ↑</option>
+      <option value="price-desc">Preço ↓</option>
+      <option value="popularity">Popularidade</option>
+    </select>
+  </div>
+  <div class="pharmacy" id="products"></div>
+</section>
+
+<div id="cart">
+  <h3>Carrinho</h3>
+  <ul id="cart-items"></ul>
+  <p>Total: R$ <span id="cart-total">0.00</span></p>
+  <button onclick="checkout()">Finalizar Compra</button>
+</div>
+
+<div class="modal" id="entryModal">
+  <div class="modal-content">
+    <h3>Bem-vindo!</h3>
+    <input type="text" id="entryName" placeholder="Nome">
+    <input type="email" id="entryEmail" placeholder="E-mail">
+    <input type="tel" id="entryPhone" placeholder="Telefone">
+    <button onclick="submitEntry()">Enviar</button>
+  </div>
+</div>
+
+<section id="profile">
+  <h3>Perfil do Usuário</h3>
+  <input type="text" id="profileName" placeholder="Nome">
+  <input type="email" id="profileEmail" placeholder="E-mail">
+  <input type="tel" id="profilePhone" placeholder="Telefone">
+  <button onclick="updateProfile()">Atualizar Dados</button>
+  <button onclick="logoutUser()">Logout</button>
+  <h4>Histórico de Compras</h4>
+  <ul id="purchaseHistory"></ul>
+</section>
+
+<footer id="contact">
+  <p>Hospital & Farmácia - Rua Exemplo, 123, Cidade, Estado</p>
+  <p>Telefone: (00) 1234-5678</p>
+  <p><a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">LinkedIn</a></p>
+</footer>
+
+<script>
+// ===== PRODUTOS =====
+const products = [
+  {id:1,name:'Paracetamol',desc:'Alívio da dor e febre',price:5.99,stock:20,category:'Analgésico',popularity:5,img:'https://via.placeholder.com/100'},
+  {id:2,name:'Ibuprofeno',desc:'Anti-inflamatório',price:8.50,stock:15,category:'Anti-inflamatório',popularity:4,img:'https://via.placeholder.com/100'},
+  {id:3,name:'Vitamina C',desc:'Suplemento vitamínico',price:12.00,stock:30,category:'Suplemento',popularity:3,img:'https://via.placeholder.com/100'},
+  {id:4,name:'Dipirona',desc:'Analgésico',price:6.00,stock:25,category:'Analgésico',popularity:4,img:'https://via.placeholder.com/100'},
+];
+let cart = [];
+
+// Funções de produtos
+function renderProducts(list=products){
+  const container = document.getElementById('products');
+  container.innerHTML='';
+  list.forEach(p=>{
+    const div = document.createElement('div');
+    div.className='product';
+    div.innerHTML = `<img src="${p.img}"><h4>${p.name}</h4><p>${p.desc}</p><p>R$ ${p.price.toFixed(2)}</p>
+                     <button onclick="addToCart(${p.id})">Adicionar</button>`;
+    container.appendChild(div);
+  });
+}
+
+function addToCart(id){
+  const product = products.find(p=>p.id===id);
+  const item = cart.find(c=>c.id===id);
+  if(item){ if(item.qty<product.stock)item.qty++; else alert('Estoque insuficiente!'); }
+  else cart.push({id:product.id,name:product.name,price:product.price,qty:1});
+  updateCart();
+}
+
+function updateCart(){
+  const list = document.getElementById('cart-items');
+  const totalEl = document.getElementById('cart-total');
+  list.innerHTML='';
+  let total=0;
+  cart.forEach(item=>{
+    total += item.price*item.qty;
+    const li = document.createElement('li');
+    li.innerHTML = `${item.name} x ${item.qty} - R$ ${(item.price*item.qty).toFixed(2)} <button onclick="removeFromCart(${item.id})">X</button>`;
+    list.appendChild(li);
+  });
+  totalEl.textContent = total.toFixed(2);
+}
+
+function removeFromCart(id){ cart = cart.filter(c=>c.id!==id); updateCart(); }
+function openCart(){ const el=document.getElementById('cart'); el.style.display=el.style.display==='block'?'none':'block'; }
+function checkout(){
+  if(cart.length===0){ alert('Carrinho vazio!'); return; }
+  alert('Compra finalizada com sucesso!');
+  savePurchaseHistory(cart);
+  cart=[]; updateCart();
+  document.getElementById('cart').style.display='none';
+}
+
+function filterProducts(){
+  const search = document.getElementById('search').value.toLowerCase();
+  const category = document.getElementById('category').value;
+  const sort = document.getElementById('sort').value;
+  let filtered = products.filter(p=>p.name.toLowerCase().includes(search)&&(category===''||p.category===category));
+  if(sort==='price-asc') filtered.sort((a,b)=>a.price-b.price);
+  if(sort==='price-desc') filtered.sort((a,b)=>b.price-a.price);
+  if(sort==='popularity') filtered.sort((a,b)=>b.popularity-a.popularity);
+  renderProducts(filtered);
+}
+
+// Modal Entrada
+const entryModal=document.getElementById('entryModal');
+window.onload=()=>{ if(!localStorage.getItem('visited')) entryModal.style.display='flex'; renderProducts(); renderPurchaseHistory(); }
+
+function submitEntry(){
+  const name=document.getElementById('entryName').value.trim();
+  const email=document.getElementById('entryEmail').value.trim();
+  const phone=document.getElementById('entryPhone').value.trim();
+  if(!name||!email||!phone){ alert('Preencha todos os campos!'); return; }
+  alert('Obrigado pelo cadastro!');
+  localStorage.setItem('visited','true');
+  entryModal.style.display='none';
+}
+
+// Perfil e histórico
+function openProfile(){
+  const userSection = document.getElementById('profile');
+  userSection.style.display = userSection.style.display==='block'?'none':'block';
+}
+
+function savePurchaseHistory(cartItems){
+  let history = JSON.parse(localStorage.getItem('purchaseHistory')||'[]');
+  const date = new Date().toLocaleString();
+  cartItems.forEach(item=>{
+    history.push({name:item.name,qty:item.qty,price:item.price,date:date});
+  });
+  localStorage.setItem('purchaseHistory',JSON.stringify(history));
+  renderPurchaseHistory();
+}
+
+function renderPurchaseHistory(){
+  const historyEl = document.getElementById('purchaseHistory');
+  const history = JSON.parse(localStorage.getItem('purchaseHistory')||'[]');
+  historyEl.innerHTML='';
+  history.forEach(h=>{
+    const li = document.createElement('li');
+    li.textContent=`${h.date}: ${h.name} x${h.qty} - R$ ${(h.price*h.qty).toFixed(2)}`;
+    historyEl.appendChild(li);
+  });
+}
+</script>
+</body>
+</html>

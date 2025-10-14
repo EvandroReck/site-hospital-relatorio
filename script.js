@@ -1,6 +1,6 @@
 // ==================== LOGIN / FORMULÁRIO ====================
-const loginOverlay = document.querySelector(".overlay");
-const loginForm = document.querySelector("#login-form");
+const loginOverlay = document.querySelector("#form-overlay");
+const loginForm = document.querySelector("#formulario");
 const siteContent = document.querySelector("#site-content");
 
 if (loginForm) {
@@ -11,20 +11,20 @@ if (loginForm) {
     const numero = document.querySelector("#numero").value.trim();
     const cpf = document.querySelector("#cpf").value.trim();
     const endereco = document.querySelector("#endereco").value.trim();
-    const estadoCivil = document.querySelector("#estado-civil").value;
+    const estadoCivil = document.querySelector("#estadoCivil").value;
 
     if (!nome || !numero || !cpf || !endereco || !estadoCivil) {
       alert("⚠️ Por favor, preencha todos os campos obrigatórios!");
       return;
     }
 
-    // Salva dados do usuário
+    // Salva os dados do usuário
     const userData = { nome, numero, cpf, endereco, estadoCivil };
     localStorage.setItem("usuario", JSON.stringify(userData));
 
-    // Esconde o login e mostra o conteúdo
+    // Esconde o login e mostra o conteúdo do site
     loginOverlay.style.display = "none";
-    if (siteContent) siteContent.style.display = "block";
+    siteContent.style.display = "block";
   });
 }
 
@@ -70,12 +70,12 @@ const paymentModal = document.querySelector("#payment-modal");
 const closePayment = document.querySelector("#close-payment");
 
 if (medsList) {
-  // Gerar medicamentos automaticamente (100 itens)
+  // Gera 100 medicamentos automaticamente
   const medicamentos = [];
   for (let i = 1; i <= 100; i++) {
     medicamentos.push({
       nome: `Medicamento ${i}`,
-      preco: (Math.random() * 80 + 10).toFixed(2)
+      preco: (Math.random() * 80 + 10).toFixed(2),
     });
   }
 

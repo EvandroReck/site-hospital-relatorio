@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Promoção da Saúde</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
-<body>
+<body id="page-index">
   <!-- Formulário obrigatório -->
-  <div id="form-overlay">
-    <form id="formulario">
+  <div id="form-overlay" class="overlay">
+    <form id="formulario" class="card form-card">
       <h2>Cadastro de Acesso</h2>
 
       <label>Nome completo:</label>
@@ -34,58 +34,152 @@
         <option>Viúvo(a)</option>
       </select>
 
-      <button type="submit">Entrar no site</button>
+      <button type="submit" class="btn primary full">Entrar no site</button>
     </form>
   </div>
 
-  <!-- Conteúdo principal -->
-  <header>
-    <div class="logo">💙 Saúde</div>
-    <nav>
-      <a href="#">Início</a>
-      <a href="#">Campanhas</a>
-      <a href="#">Vacinação</a>
-      <a href="#">Atendimentos</a>
-      <button id="perfil-btn">👤</button>
-    </nav>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><span class="cross">+</span> <span class="brand">SAÚDE</span></div>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#campanhas">Campanhas</a>
+        <a href="#contato">Contato</a>
+        <a href="medicamentos.html" id="btn-medicamentos" class="highlight">Medicamentos</a>
+        <button id="perfil-btn" class="profile-btn" title="Abrir perfil">👤</button>
+      </nav>
+    </div>
   </header>
 
+  <!-- Hero -->
   <main>
-    <section class="hero">
-      <div class="texto">
-        <h1>Promoção da Saúde</h1>
-        <p>Informações sobre saúde preventiva, campanhas de vacinação e disponibilidade de atendimentos.</p>
-        <button class="btn-azul">Saiba mais</button>
+    <section id="inicio" class="hero container">
+      <div class="hero-left">
+        <h1>Promoção da Saúde — Informação e serviços para todos</h1>
+        <p class="lead">Agende consultas, acompanhe campanhas, encontre atendimentos e compre medicamentos com segurança — tudo em um só lugar.</p>
+        <div class="hero-ctas">
+          <a href="#servicos" class="btn primary">Ver serviços</a>
+          <a href="medicamentos.html" class="btn outline">Ir para a Farmácia</a>
+        </div>
+
+        <div class="trust-bar">
+          <div>✅ Atendimento 24h</div>
+          <div>💉 Campanhas ativas</div>
+          <div>🩺 Especialidades</div>
+          <div>🚚 Entrega de medicamentos</div>
+        </div>
       </div>
-      <img src="https://cdn-icons-png.flaticon.com/512/4320/4320365.png" alt="Médica" class="img-hero">
+
+      <div class="hero-right">
+        <img src="https://cdn-icons-png.flaticon.com/512/4320/4320365.png" alt="Ilustração médica">
+      </div>
     </section>
 
-    <section class="cards">
-      <div class="card">
-        <h3>📢 Campanhas</h3>
-        <p>Apoio em campanhas de prevenção e conscientização.</p>
+    <!-- Serviços chamativos -->
+    <section id="servicos" class="container cards-grid">
+      <div class="card big">
+        <h3>🩺 Consultas e Agendamentos</h3>
+        <p>Agende consultas para várias especialidades, veja disponibilidade em tempo real e receba lembretes.</p>
       </div>
+
       <div class="card">
-        <h3>💉 Vacinação</h3>
-        <p>Informações sobre a importância e locais de vacinação.</p>
+        <h3>🏥 Estrutura Hospitalar</h3>
+        <ul>
+          <li>Emergência 24h</li>
+          <li>UTI e Centro Cirúrgico</li>
+          <li>Laboratório e Imagem</li>
+        </ul>
       </div>
+
       <div class="card">
-        <h3>🩺 Atendimentos</h3>
-        <p>Disponibilidade de atendimentos e consultas.</p>
+        <h3>💊 Farmácia e Entrega</h3>
+        <p>Compre os medicamentos disponíveis e escolha retirada ou entrega.</p>
+        <a class="btn small" href="medicamentos.html">Ver Farmácia</a>
       </div>
+
+      <div class="card">
+        <h3>📚 Educação em Saúde</h3>
+        <p>Conteúdos, vídeos e cursos rápidos sobre prevenção e autocuidado.</p>
+      </div>
+
+      <div class="card">
+        <h3>🔔 Monitoramento</h3>
+        <p>Sensores (projeto piloto) para controle de temperatura, alarmes e estoque automatizado.</p>
+      </div>
+
+      <div class="card">
+        <h3>📣 Campanhas Ativas</h3>
+        <p>Vacinação, prevenção da dengue, campanha de saúde mental e mais.</p>
+      </div>
+    </section>
+
+    <!-- Seções adicionais chamativas -->
+    <section class="container highlights">
+      <div class="highlight-card">
+        <h4>🔥 Ações em Destaque</h4>
+        <p>Vacinação em bairros próximos — confira datas e postos abertos.</p>
+      </div>
+      <div class="highlight-card">
+        <h4>📦 Estoque de Medicamentos</h4>
+        <p>Sistema alerta falta de remédios em unidades parceiras.</p>
+      </div>
+      <div class="highlight-card">
+        <h4>📊 Indicadores</h4>
+        <p>Tempo médio de espera, número de atendimentos e taxa de ocupação atual.</p>
+      </div>
+    </section>
+
+    <!-- Notícias rápidas -->
+    <section id="campanhas" class="container news">
+      <h3>Notícias e campanhas</h3>
+      <div class="news-grid">
+        <article class="news-item">
+          <h4>Campanha de Vacinação Infantil</h4>
+          <p>Leve suas crianças aos postos no próximo sábado.</p>
+        </article>
+        <article class="news-item">
+          <h4>Prevenção contra Dengue</h4>
+          <p>Mutirão de limpeza e aplicação de larvicida.</p>
+        </article>
+        <article class="news-item">
+          <h4>Teleconsulta Gratuita</h4>
+          <p>Atendimento rápido por vídeo para triagem.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="container contact">
+      <h3>Contato</h3>
+      <p>Email: contato@saude.gov.br — Telefone: 136</p>
     </section>
   </main>
 
-  <!-- Modal do perfil -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Promoção da Saúde — Desenvolvido por King Op</p>
+    </div>
+  </footer>
+
+  <!-- Perfil Modal -->
   <div id="perfil-modal" class="modal">
-    <div class="modal-content">
-      <span id="fechar-perfil">&times;</span>
-      <h2>Perfil do Usuário</h2>
-      <p><strong>Nome:</strong> <span id="perfil-nome"></span></p>
-      <p><strong>Telefone:</strong> <span id="perfil-numero"></span></p>
-      <p><strong>CPF:</strong> <span id="perfil-cpf"></span></p>
-      <p><strong>Endereço:</strong> <span id="perfil-endereco"></span></p>
-      <p><strong>Estado Civil:</strong> <span id="perfil-estadoCivil"></span></p>
+    <div class="modal-content card">
+      <button id="fechar-perfil" class="close-btn">&times;</button>
+      <h3>Perfil do usuário</h3>
+      <div class="perfil-info">
+        <p><strong>Nome:</strong> <span id="perfil-nome"></span></p>
+        <p><strong>Telefone:</strong> <span id="perfil-numero"></span></p>
+        <p><strong>CPF:</strong> <span id="perfil-cpf"></span></p>
+        <p><strong>Endereço:</strong> <span id="perfil-endereco"></span></p>
+        <p><strong>Estado Civil:</strong> <span id="perfil-estadoCivil"></span></p>
+      </div>
+      <div class="modal-actions">
+        <button id="editar-perfil" class="btn">Editar</button>
+        <button id="logout" class="btn outline">Sair</button>
+      </div>
     </div>
   </div>
 </body>
